@@ -1,6 +1,5 @@
 import requests
 import json
-from pprint import pprint
 from key import key
 
 url = f'http://api.openweathermap.org/data/2.5/weather?q=montreal,ca{id}&appid={key}&units=metric'
