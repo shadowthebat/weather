@@ -2,6 +2,7 @@ import requests
 import json
 from key import key
 from datetime import datetime
+import os
 
 def t_format(x):
     # adds 0 infront min or hour given is single digit
@@ -62,7 +63,7 @@ elif wdeg <= 168.75 and wdeg >= 101.25:
 elif wdeg >= 191.25 and wdeg <= 258.75:
     d = 'SW'
 wdeg = d
-
+os.system('clear')
 # prints redable weather info
 print()
 print(f'{name}, {country}\n{lat}, {lon}')
