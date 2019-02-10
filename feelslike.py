@@ -1,4 +1,5 @@
 import math
+import json
 
 def t_format(x):
     # adds 0 infront min or hour given is single digit
@@ -34,3 +35,29 @@ def feels(wind,temp, humidity):
         if humidex < temp:
             humidex = temp
         return humidex
+
+def findid(x):
+    with open('cityid.json','r') as f:
+        cities = f.read()
+    cities = json.loads(cities)
+    for i in cities:
+        if x == i['name'].upper():
+            print(i['name'])
+            print(i['country'])
+            print(i['id'])
+            print()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
