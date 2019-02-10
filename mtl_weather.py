@@ -20,6 +20,7 @@ data = source.json() # response --> Python Dictionary
 # create variables with desired values from data
 dt = datetime.fromtimestamp(data['dt'])
 time = dt.time()
+date = dt.date()
 name = data['name']
 country = data['sys']['country']
 lat = data['coord']['lat']
@@ -92,4 +93,5 @@ print(f'Sunset     :    {seth}:{setm}')
 print('-------------------------')
 print()
 print(f'Last Update:    {time}')
+print(f'                {date}')
 print()
