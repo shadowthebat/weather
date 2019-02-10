@@ -3,6 +3,7 @@ import json
 from key import key
 from datetime import datetime
 import os
+from feelslike import *
 
 def t_format(x):
     # adds 0 infront min or hour given is single digit
@@ -17,15 +18,20 @@ source = requests.get(apiurl) # response RAW
 data = source.json() # response --> Python Dictionary
 
 # create variables with desired values from data
+dt = datetime.fromtimestamp(data['dt'])
+time = dt.time()
 name = data['name']
 country = data['sys']['country']
 lat = data['coord']['lat']
 lon = data['coord']['lon']
 temp = data['main']['temp']
 weather = data['weather'][0]['main']
+weather_d = data['weather'][0]['description']
 vis = data['visibility']
+vis = round(vis/1000)
 humidity = data['main']['humidity']
 pressure = data['main']['pressure']
+pressure = round(pressure/10)
 
 # sunrise/sunset
 sunrise = data['sys']['sunrise']
@@ -43,39 +49,47 @@ setm = t_format(setm)
 
 # wind
 wspeed = data['wind']['speed']
+wspeed = converter(wspeed) # from meter/sec to km/h
+feels = feels(wspeed, temp)
 wdeg = data['wind']['deg']
 deg = wdeg
-# compares degree of wind direction to determin proper label
-if wdeg > 348.75 or wdeg < 11.25:
+# compares degree of wind to determin appropriate label
+if wdeg >= 338 or wdeg < 23:
     d = 'N'
-elif wdeg > 78.75 and wdeg < 101.25:
+elif wdeg in range(23, 68):
+    d = 'NE'
+elif wdeg in range(68, 113):
     d = 'E'
-elif wdeg > 168.75 and wdeg < 191.25:
-    d = 'S'
-elif wdeg > 258.75 and wdeg < 281.25:
-    d = 'W'
-elif wdeg <= 348.75 and wdeg >= 281.25:
-    d = 'NW'
-elif wdeg >= 11.25 and wdeg <= 78.75:
-        d = 'NE'
-elif wdeg <= 168.75 and wdeg >= 101.25:
+elif wdeg in range(113, 158):
     d = 'SE'
-elif wdeg >= 191.25 and wdeg <= 258.75:
+elif wdeg in range(158, 203):
+    d = 'S'
+elif wdeg in range(203, 248):
     d = 'SW'
+elif wdeg in range(248, 293):
+    d = 'W'
+elif wdeg in range(293, 338):
+    d = 'NW'
 wdeg = d
 os.system('clear')
 # prints redable weather info
-print()
 print(f'{name}, {country}\n{lat}, {lon}')
-print('-------------------------')
 print(f'Temperature:    {temp} C°')
 print(f'Conditions :    {weather}')
 print('-------------------------')
+print()
+print(f'Feels Like :    {feels} C°')
+print(f'Description:    {weather_d}')
+print('-------------------------')
+print()
 print(f'Wind       :    {d}, {deg}°')
 print(f'W. Speed   :    {wspeed} km/h')
 print(f'Humidity   :    {humidity} %')
 print(f'Visibility :    {vis} km')
-print(f'Pressure   :    {pressure} hPa')
+print(f'Pressure   :    {pressure} kPa')
 print(f'Sunrise    :    {riseh}:{risem}')
 print(f'Sunset     :    {seth}:{setm}')
+print('-------------------------')
+print()
+print(f'Last Update:    {time}')
 print()
