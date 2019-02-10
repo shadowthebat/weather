@@ -7,7 +7,9 @@ import sys
 from feelslike import *
 
 if len(sys.argv) > 1:
-    apiurl = f'http://api.openweathermap.org/data/2.5/weather?q={sys.argv[1]}{id}&appid={key}&units=metric'
+    city = sys.argv[1:]
+    city = '%20'.join(city)
+    apiurl = f'http://api.openweathermap.org/data/2.5/weather?q={city}{id}&appid={key}&units=metric'
 else:
     apiurl = f'http://api.openweathermap.org/data/2.5/weather?q=montreal,ca{id}&appid={key}&units=metric'
 source = requests.get(apiurl) # response RAW
