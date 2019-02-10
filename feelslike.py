@@ -1,3 +1,13 @@
+import math
+
+def t_format(x):
+    # adds 0 infront min or hour given is single digit
+    if x < 10:
+        time = f'0{x}'
+        return time
+    else:
+        return x
+
 def intervols():
     # used to determin direction labels
     x = 0
@@ -11,8 +21,16 @@ def converter(x):
     x = x/1000
     return round(x)
 
-def feels(wind,temp):
+def feels(wind,temp, humidity):
     # Calculations from official canada website
     if wind >= 6 and temp > -50 and temp <= 5:
         chill=(13.12+0.6215*temp-11.37*(wind**0.16)+0.3965*temp*(wind**0.16))
         return round(chill)
+    else:
+        kelvin = temp + 273
+        eTs = 10 ** ((-2937.4 / kelvin) - 4.9283 * math.log(kelvin) / 2.30258509299 + 23.5471)
+        eTd=eTs * humidity / 100
+        humidex = round(temp + ((eTd-10)*5/9))
+        if humidex < temp:
+            humidex = temp
+        return humidex

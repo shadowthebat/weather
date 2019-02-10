@@ -5,14 +5,6 @@ from datetime import datetime
 import os
 from feelslike import *
 
-def t_format(x):
-    # adds 0 infront min or hour given is single digit
-    if x < 10:
-        time = f'0{x}'
-        return time
-    else:
-        return x
-
 apiurl = f'http://api.openweathermap.org/data/2.5/weather?q=montreal,ca{id}&appid={key}&units=metric'
 source = requests.get(apiurl) # response RAW
 data = source.json() # response --> Python Dictionary
@@ -25,7 +17,7 @@ name = data['name']
 country = data['sys']['country']
 lat = data['coord']['lat']
 lon = data['coord']['lon']
-temp = data['main']['temp']
+temp = round(data['main']['temp'])
 weather = data['weather'][0]['main']
 weather_d = data['weather'][0]['description']
 vis = data['visibility']
@@ -51,7 +43,7 @@ setm = t_format(setm)
 # wind
 wspeed = data['wind']['speed']
 wspeed = converter(wspeed) # from meter/sec to km/h
-feels = feels(wspeed, temp)
+feels = feels(wspeed, temp, humidity)
 wdeg = data['wind']['deg']
 deg = wdeg
 # compares degree of wind to determin appropriate label
