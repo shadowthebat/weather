@@ -3,9 +3,13 @@ import json
 from key import key
 from datetime import datetime
 import os
+import sys
 from feelslike import *
 
-apiurl = f'http://api.openweathermap.org/data/2.5/weather?q=montreal,ca{id}&appid={key}&units=metric'
+if len(sys.argv) > 1:
+    apiurl = f'http://api.openweathermap.org/data/2.5/weather?q={sys.argv[1]}{id}&appid={key}&units=metric'
+else:
+    apiurl = f'http://api.openweathermap.org/data/2.5/weather?q=montreal,ca{id}&appid={key}&units=metric'
 source = requests.get(apiurl) # response RAW
 data = source.json() # response --> Python Dictionary
 
