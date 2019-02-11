@@ -3,6 +3,7 @@ import json
 import os
 import sys
 
+
 class Weather:
     def __init__(self, name, country, lat, lon, temp, weather, feels, weather_d,
                  label, deg, wspeed, humidity, vis, pressure, sunrise, sunset, time, date):
@@ -175,7 +176,3 @@ def create_url(y,key):
             return f'http://api.openweathermap.org/data/2.5/weather?q={city}&appid={key}&units=metric'
     else:
         return f'http://api.openweathermap.org/data/2.5/weather?id=6077243&appid={key}&units=metric'
-
-
-
-6077243
