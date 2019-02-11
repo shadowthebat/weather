@@ -85,7 +85,7 @@ def feels(wind,temp, humidity):
     '''
         Calculates feels like conditions windchill/humidex
     '''
-    if wind >= 6 and temp > -50 and temp <= 5:
+    if wind >= 5 and temp > -50 and temp <= 5:
         chill=(13.12+0.6215*temp-11.37*(wind**0.16)+0.3965*temp*(wind**0.16))
         return round(chill)
     else:
@@ -125,7 +125,7 @@ def findid(x, id_dic):
 def wind_label(wdeg):
     """
         compares degree of wind to determin appropriate label
-        """
+    """
     if wdeg >= 338 or wdeg < 23:
         return 'N'
     elif wdeg in range(23, 68):
