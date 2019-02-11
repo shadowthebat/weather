@@ -44,6 +44,7 @@ def findid(x):
         if x == i['name'].upper():
             print(i['name'])
             print(i['country'])
+            print(i['coord'])
             print(i['id'])
             print()
 

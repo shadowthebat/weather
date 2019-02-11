@@ -5,14 +5,27 @@ from datetime import datetime
 import os
 import sys
 from feelslike import *
+from pprint import pprint
 
 if len(sys.argv) > 1:
     if len(sys.argv) > 2:
         if sys.argv[1] == 'findid':
-            x = sys.argv[2].upper()
-            findid(x)
-            id = input('Enter id: ')
-            apiurl = f'http://api.openweathermap.org/data/2.5/weather?id={id}&appid={key}&units=metric'
+            if len(sys.argv) > 3:
+                x = sys.argv[2:]
+                x = ' '.join(x)
+                x = x.upper()
+                findid(x)
+                id = input('Enter id: ')
+                apiurl = f'http://api.openweathermap.org/data/2.5/weather?id={id}&appid={key}&units=metric'
+                source = requests.get(apiurl) # response RAW
+                data = source.json() # response --> Python Dictionary
+                pprint(data)
+        
+            else:
+                x = sys.argv[2].upper()
+                findid(x)
+                id = input('Enter id: ')
+                apiurl = f'http://api.openweathermap.org/data/2.5/weather?id={id}&appid={key}&units=metric'
         
         else:
             city = sys.argv[1:]
