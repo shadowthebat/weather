@@ -174,7 +174,8 @@ def create_url(y,key):
             city = y[1]
             return f'http://api.openweathermap.org/data/2.5/weather?q={city}&appid={key}&units=metric'
     else:
-        return f'http://api.openweathermap.org/data/2.5/weather?q=montreal,ca&appid={key}&units=metric'
+        return f'http://api.openweathermap.org/data/2.5/weather?id=6077243&appid={key}&units=metric'
 
 
 
+6077243
