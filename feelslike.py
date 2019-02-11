@@ -101,6 +101,7 @@ def findid(x, id_dic):
     '''
         Offers a choice between similar named cities
     '''
+    os.system('clear')
     with open('cityid.json','r') as f:
         cities = f.read()
     cities = json.loads(cities)
