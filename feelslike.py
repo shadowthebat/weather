@@ -36,17 +36,23 @@ def feels(wind,temp, humidity):
             humidex = temp
         return humidex
 
-def findid(x):
+def findid(x, id_dic):
+    # Finds city id by name
     with open('cityid.json','r') as f:
         cities = f.read()
     cities = json.loads(cities)
+    choose_count = 1
     for i in cities:
         if x == i['name'].upper():
             print(i['name'])
             print(i['country'])
-            print(i['coord'])
-            print(i['id'])
+            print(i['coord']['lat'])
+            print(i['coord']['lon'])
+            print(f'CHOICE: {choose_count}')
             print()
+            id_dic[str(choose_count)] = i['id']
+            choose_count += 1
+
 
 
 
