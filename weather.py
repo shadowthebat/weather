@@ -11,13 +11,18 @@ source = requests.get(apiurl) # response RAW
 data = source.json() # response --> Python Dictionary
 
 # create variables with desired values from data
+# date
 dt = datetime.fromtimestamp(data['dt'])
 time = dt.time()
 date = dt.date()
+
+# location info
 name = data['name']
 country = data['sys']['country']
 lat = data['coord']['lat']
 lon = data['coord']['lon']
+
+# temperature and conditions
 temp = round(data['main']['temp'])
 weather = data['weather'][0]['main']
 weather_d = data['weather'][0]['description']
@@ -26,6 +31,13 @@ vis = round(vis/1000)
 humidity = data['main']['humidity']
 pressure = data['main']['pressure']
 pressure = round(pressure/10)
+
+# wind
+wspeed = data['wind']['speed']
+wspeed = converter(wspeed) # from meter/sec to km/h
+feels = feels(wspeed, temp, humidity)
+deg = round(data['wind']['deg'])
+label = wind_label(deg)
 
 # sunrise/sunset
 sunrise = data['sys']['sunrise']
@@ -42,13 +54,6 @@ setm = sunset.minute
 seth = t_format(seth)
 setm = t_format(setm)
 sunset = f'{seth}:{setm}'
-
-# wind
-wspeed = data['wind']['speed']
-wspeed = converter(wspeed) # from meter/sec to km/h
-feels = feels(wspeed, temp, humidity)
-deg = data['wind']['deg']
-label = wind_label(deg)
 
 # current weather class
 current = Weather(name, country, lat, lon, temp, weather, feels, weather_d,
