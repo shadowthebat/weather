@@ -1,5 +1,8 @@
 # weather
 
+To try this script for yourself, don't forget to sign up with
+open weather maps api to request an api key
+
 DEFAULT CITY
 Run python weather.py to:
   display current weather via open weather maps api.
