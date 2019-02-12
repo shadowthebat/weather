@@ -152,28 +152,27 @@ def create_url(y,key):
     if len(y) == 1:
         return f'http://api.openweathermap.org/data/2.5/weather?id=6077243&appid={key}&units=metric'
     else:
-        if len(y) > 2:
+        if len(y) == 2:
+            city = y[1]
+            return f'http://api.openweathermap.org/data/2.5/weather?q={city}&appid={key}&units=metric'
+        else:
             if y[1] == 'find':
                 id_dic = {}
-                if len(y) > 3:
+                if len(y) <= 3:
+                    x = y[2].upper()
+                    choice = findid(x, id_dic)
+                    id = id_dic[choice]
+                    return f'http://api.openweathermap.org/data/2.5/weather?id={id}&appid={key}&units=metric'
+                else:
                     x = y[2:]
                     x = ' '.join(x)
                     x = x.upper()
                     choice = findid(x, id_dic)
                     id = id_dic[choice]
                     return f'http://api.openweathermap.org/data/2.5/weather?id={id}&appid={key}&units=metric'
-        
-                else:
-                    x = y[2].upper()
-                    choice = findid(x, id_dic)
-                    id = id_dic[choice]
-                    return f'http://api.openweathermap.org/data/2.5/weather?id={id}&appid={key}&units=metric'
+
             
             else:
                 city = y[1:]
                 city = '%20'.join(city)
                 return f'http://api.openweathermap.org/data/2.5/weather?q={city}&appid={key}&units=metric'
-
-        else:
-            city = y[1]
-            return f'http://api.openweathermap.org/data/2.5/weather?q={city}&appid={key}&units=metric'
