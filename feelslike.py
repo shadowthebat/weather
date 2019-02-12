@@ -149,7 +149,9 @@ def create_url(y,key):
     '''
         Creates appropriate url based on sys.argv(y)
     '''
-    if len(y) > 1:
+    if len(y) == 1:
+        return f'http://api.openweathermap.org/data/2.5/weather?id=6077243&appid={key}&units=metric'
+    else:
         if len(y) > 2:
             if y[1] == 'find':
                 id_dic = {}
@@ -175,5 +177,3 @@ def create_url(y,key):
         else:
             city = y[1]
             return f'http://api.openweathermap.org/data/2.5/weather?q={city}&appid={key}&units=metric'
-    else:
-        return f'http://api.openweathermap.org/data/2.5/weather?id=6077243&appid={key}&units=metric'
