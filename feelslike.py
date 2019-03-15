@@ -85,7 +85,7 @@ def feels(wind,temp, humidity):
     '''
         Calculates feels like conditions windchill/humidex
     '''
-    if wind >= 5 and temp > -50 and temp <= 5:
+    if wind >= 5 and temp > -50 and temp <= 10:
         chill=(13.12+0.6215*temp-11.37*(wind**0.16)+0.3965*temp*(wind**0.16))
         return round(chill)
     else:
@@ -102,7 +102,7 @@ def findid(x, id_dic):
         Offers a choice between similar named cities
     '''
     os.system('clear')
-    with open('cityid.json','r') as f:
+    with open('/Users/dunawa/Python/Portfolio/weather/cityid.json','r') as f:
         cities = f.read()
     cities = json.loads(cities)
     choose_count = 1
@@ -171,7 +171,6 @@ def create_url(y,key):
                     id = id_dic[choice]
                     return f'http://api.openweathermap.org/data/2.5/weather?id={id}&appid={key}&units=metric'
 
-            
             else:
                 city = y[1:]
                 city = '%20'.join(city)

@@ -11,7 +11,7 @@ source = requests.get(apiurl) # response RAW
 data = source.json() # response --> Python Dictionary
 
 # create variables with desired values from data
-# date
+# datetime
 dt = datetime.fromtimestamp(data['dt'])
 time = dt.time()
 date = dt.date()
