@@ -85,7 +85,7 @@ def feels(wind,temp, humidity):
     '''
         Calculates feels like conditions windchill/humidex
     '''
-    if wind >= 5 and temp > -50 and temp <= 10:
+    if wind >= 5 and temp > -50 and temp <= 15:
         chill=(13.12+0.6215*temp-11.37*(wind**0.16)+0.3965*temp*(wind**0.16))
         return round(chill)
     else:
