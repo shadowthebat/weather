@@ -1,7 +1,10 @@
 # weather
 
 To try this script for yourself, don't forget to sign up with 
-open weather maps api to request an api key
+open weather maps api to request an api key.
+Then create file in weather directory called key.py with 2 variables.
+key = '{YOUR API KEY}'
+find_id_path = '{FULL PATH TO cityid.json}'
   
 DEFAULT CITY
 Run python weather.py to:     
