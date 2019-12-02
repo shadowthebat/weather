@@ -2,7 +2,7 @@ import math
 import json
 import os
 import sys
-
+from key import find_id_path
 
 class Weather:
     def __init__(self, name, country, lat, lon, temp, weather, feels, weather_d,
@@ -102,7 +102,7 @@ def findid(x, id_dic):
         Offers a choice between similar named cities
     '''
     os.system('clear')
-    with open('/Users/dunawa/Python/Portfolio/weather/cityid.json','r') as f:
+    with open(find_id_path,'r') as f:
         cities = f.read()
     cities = json.loads(cities)
     choose_count = 1
