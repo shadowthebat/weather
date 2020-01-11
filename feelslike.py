@@ -23,27 +23,27 @@ class Weather:
         self.date = self.dt.date()
 
         # location info
-        self.name = self.data['name']
+        self.city = self.data['name']
         self.country = self.data['sys']['country']
         self.lat = self.data['coord']['lat']
         self.lon = self.data['coord']['lon']
 
         # temperature and conditions
         self.temp = round(self.data['main']['temp'])
-        self.weather = self.data['weather'][0]['main']
-        self.weather_d = self.data['weather'][0]['description']
-        self.vis = self.data['visibility']
-        self.vis = round(self.vis/1000)
+        self.conditions = self.data['weather'][0]['main']
+        self.description = self.data['weather'][0]['description']
+        self.visibility = self.data['visibility']
+        self.visibility = round(self.visibility/1000)
         self.humidity = self.data['main']['humidity']
         self.pressure = self.data['main']['pressure']
         self.pressure = round(self.pressure/10)
 
         # wind
         self.wspeed = self.data['wind']['speed']
-        self.wspeed = converter(self.wspeed) # from meter/sec to km/h
-        self.feels = feels(self.wspeed, self.temp, self.humidity)
-        self.deg = round(self.data['wind']['deg'])
-        self.label = wind_label(self.deg)
+        self.w_speed = converter(self.wspeed) # from meter/sec to km/h
+        self.feels = feels(self.w_speed, self.temp, self.humidity)
+        self.w_deg = round(self.data['wind']['deg'])
+        self.w_label = wind_label(self.w_deg)
 
         # sunrise/sunset
         self.sunrise = self.data['sys']['sunrise']
@@ -66,19 +66,19 @@ class Weather:
             prints redable weather info
         '''
         os.system('clear')
-        print(f'{self.name}, {self.country}\n{self.lat}, {self.lon}')
+        print(f'{self.city}, {self.country}\n{self.lat}, {self.lon}')
         print(f'Temperature:    {self.temp} C°')
-        print(f'Conditions :    {self.weather}')
+        print(f'Conditions :    {self.conditions}')
         print('-------------------------')
         print()
         print(f'Feels Like :    {self.feels} C°')
-        print(f'Description:    {self.weather_d}')
+        print(f'Description:    {self.description}')
         print('-------------------------')
         print()
-        print(f'Wind       :    {self.label}, {self.deg}°')
-        print(f'W. Speed   :    {self.wspeed} km/h')
+        print(f'Wind       :    {self.w_label}, {self.w_deg}°')
+        print(f'W. Speed   :    {self.w_speed} km/h')
         print(f'Humidity   :    {self.humidity} %')
-        print(f'Visibility :    {self.vis} km')
+        print(f'Visibility :    {self.visibility} km')
         print(f'Pressure   :    {self.pressure} kPa')
         print(f'Sunrise    :    {self.sunrise}')
         print(f'Sunset     :    {self.sunset}')
@@ -87,6 +87,15 @@ class Weather:
         print(f'Last Update:    {self.time}')
         print(f'                {self.date}')
         print()
+
+    def attributes(self):
+        '''
+            lists class attributes
+        '''
+        list_data = 'city country lat lon temp conditions feels description w_label w_deg w_speed humidity visibility pressure sunrise sunset time date'
+        list_data = list_data.split()
+        print(list_data)
+
 
 # -- Functions --
 def create_url(y,key):
@@ -200,14 +209,3 @@ def findid(x, id_dic):
     else:
         choice = input('Enter choice: ')
         return choice
-
-def intervols():
-    '''
-        tool used to determin direction labels
-        tool not directly exploited by
-        Weather Class or other functions
-    '''
-    x = 0
-    while x < 360:
-        print(x)
-        x += 22.5
