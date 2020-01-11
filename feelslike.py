@@ -1,11 +1,10 @@
-import math
-import json
-import os
 import sys
-from key import find_id_path
-from key import key
+from key import *
 import requests
+import json
 from datetime import datetime
+import math
+import os
 
 # -- Classes --
 class Weather:
