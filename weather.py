@@ -1,7 +1,7 @@
 from feelslike import *
 
-# current weather class
-current = Weather()
+# snapshot current weather
+weather = Weather()
 
-# display current weather
-current.display()
+# display snapshot data
+weather.display()
