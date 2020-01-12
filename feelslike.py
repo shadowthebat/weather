@@ -32,10 +32,10 @@ class Weather:
         self.conditions = self.data['weather'][0]['main']
         self.description = self.data['weather'][0]['description']
         self.visibility = self.data['visibility']
-        self.visibility = round(self.visibility/1000)
+        self.visibility = round(self.visibility/1000, 1)
         self.humidity = self.data['main']['humidity']
         self.pressure = self.data['main']['pressure']
-        self.pressure = round(self.pressure/10)
+        self.pressure = round(self.pressure/10, 1)
 
         # wind
         self.wspeed = self.data['wind']['speed']
