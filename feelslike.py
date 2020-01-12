@@ -194,10 +194,12 @@ def findid(x, id_dic):
     choose_count = 1
     for i in cities:
         if x == i['name'].upper():
-            print(i['name'])
-            print(i['country'])
-            print(i['coord']['lat'])
-            print(i['coord']['lon'])
+            n = i['name']
+            c = i['country']
+            lt = round(i['coord']['lat'], 2)
+            ln = round(i['coord']['lon'], 2)
+            print(f'{n}, {c}')
+            print(f'{lt}, {ln}')
             print(f'CHOICE: {choose_count}')
             print()
             id_dic[str(choose_count)] = i['id']
