@@ -66,11 +66,11 @@ class Weather:
         '''
         os.system('clear')
         print(f'{self.city}, {self.country}\n{self.lat}, {self.lon}')
-        print(f'Temperature:    {self.temp} C°')
+        print(f'Temperature:    {self.temp} °C')
         print(f'Conditions :    {self.conditions}')
         print('-------------------------')
         print()
-        print(f'Feels Like :    {self.feels} C°')
+        print(f'Feels Like :    {self.feels} °C')
         print(f'Description:    {self.description}')
         print('-------------------------')
         print()
@@ -93,7 +93,7 @@ class Weather:
         '''
         list_data = 'city country lat lon temp conditions feels description w_label w_deg w_speed humidity visibility pressure sunrise sunset time date'
         list_data = list_data.split()
-        print(list_data)
+        return list_data
 
 
 # -- Functions --
